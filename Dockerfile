@@ -5,7 +5,7 @@ WORKDIR ${ROOT}
 
 COPY Gemfile Gemfile.lock ${ROOT}
 
-RUN gem install bundler && bundle install --without test development
+RUN gem install bundler && bundle install
 
 FROM ruby:3.2.2-bullseye as runner
 
