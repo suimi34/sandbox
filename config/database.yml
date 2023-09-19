@@ -15,7 +15,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password: root
-  host: 0.0.0.0
+  host: <%= ENV["DB_HOST"] %>
   port: 3306
 
 development:
