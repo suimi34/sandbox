@@ -1,9 +1,28 @@
+import type { NextPage, GetServerSideProps } from 'next';
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
+import { gql } from 'urql';
+import { urqlClient } from '../lib/gql-requests';
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+type Props = {
+  dog: {
+    name: string;
+  }
+};
+
+const DogQuery = gql`
+  query dog($id: ID!) {
+    dog(id: $id) {
+      id
+      name
+    }
+  }`;
+
+const Home: NextPage<Props> = (props) => {
+  console.log('props', props)
+
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
@@ -116,3 +135,23 @@ export default function Home() {
     </main>
   )
 }
+
+export const getServerSideProps: GetServerSideProps<Props> = async () => {
+  try {
+    const client = await urqlClient();
+
+    const result = await client.query(DogQuery, { id: 1 }).toPromise();
+
+    return {
+      props: {
+        dog: result.data.dog,
+      }
+    }
+  } catch(e) {
+    return {
+      notFound: true
+    }
+  }
+}
+
+export default Home;
