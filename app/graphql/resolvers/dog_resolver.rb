@@ -4,7 +4,7 @@ module Resolvers
 
     type Types::DogType, null: false
 
-    def resolver(id:)
+    def resolve(id:)
       Dog.find(id)
     end
   end
