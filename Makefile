@@ -9,3 +9,6 @@ migrate:
 
 web:
 	docker compose up --no-deps web
+
+schema:
+	docker compose run --rm --no-deps web rails graphql:schema:dump
