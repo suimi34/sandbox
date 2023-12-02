@@ -1,0 +1,56 @@
+name: CI
+on: [push]
+env:
+  # FIREBASE_API_KEY: ${{ vars.FIREBASE_API_KEY }}
+  # FIREBASE_AUTH_DOMAIN: ${{ vars.FIREBASE_AUTH_DOMAIN }}
+  # RAILS_MASTER_KEY: ${{ vars.RAILS_MASTER_KEY }}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Build docker image
+        run: docker build . -t suimi34/sandbox:dev
+        # run: docker build -f Dockerfile.prod --build-arg FIREBASE_API_KEY=$FIREBASE_API_KEY --build-arg FIREBASE_AUTH_DOMAIN=$FIREBASE_AUTH_DOMAIN --build-arg RAILS_MASTER_KEY=$RAILS_MASTER_KEY . -t suimi34/ec_rails:prod && docker save suimi34/ec_rails:prod > prod.tar
+
+      # - name: save docker image as tar
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: prod.tar
+      #     path: ./prod.tar
+
+  # push:
+  #   needs: build
+  #   if: github.repository == 'suimi34/main'
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Login to Docker Hub
+  #       uses: docker/login-action@v3
+  #       with:
+  #         username: ${{ vars.DOCKERHUB_USERNAME }}
+  #         password: ${{ vars.DOCKERHUB_TOKEN }}
+
+  #     - name: load docker image
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: prod.tar
+
+  #     - name: push to docker hub
+  #       run: docker load -i prod.tar && docker push suimi34/ec_rails:prod
+
+  # deploy:
+  #   needs: push
+  #   if: github.repository == 'suimi34/main'
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Add SSH key
+  #       env:
+  #         SSH_KEY: ${{ secrets.SSH_KEY }}
+  #       run: mkdir -p .ssh && chmod 700 .ssh && echo "$SSH_KEY" > .ssh/id_rsa && chmod 600 .ssh/id_rsa
+
+  #     - name: Run deploy script
+  #       run: ssh -l root -t -t -o "StrictHostKeyChecking=no" -i .ssh/id_rsa $HOST "sh deploy.sh"
+  #       env:
+  #         HOST: ${{ vars.HOST }}
