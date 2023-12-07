@@ -24,6 +24,8 @@ services:
       DB_NAME: sandbox_development
       DB_USER: root
       DB_PASS: root
+    env_file:
+      - .env
     depends_on:
       - db
 
