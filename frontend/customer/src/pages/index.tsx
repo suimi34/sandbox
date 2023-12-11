@@ -2,7 +2,7 @@ import type { NextPage, GetServerSideProps } from 'next';
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import { gql } from 'urql';
-import { urqlClient } from '../lib/gql-requests';
+import { urqlClient } from '../../graphql/lib/gql-requests';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -136,19 +136,18 @@ const Home: NextPage<Props> = (props) => {
 }
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  try {
-    const client = await urqlClient();
+  const client = await urqlClient();
+  const result = await client.query(DogQuery, { id: 1 }).toPromise();
 
-    const result = await client.query(DogQuery, { id: 1 }).toPromise();
-
-    return {
-      props: {
-        dog: result.data.dog,
-      }
-    }
-  } catch(e) {
+  if (result.error) {
     return {
       notFound: true
+    }
+  }
+
+  return {
+    props: {
+      dog: result.data.dog,
     }
   }
 }

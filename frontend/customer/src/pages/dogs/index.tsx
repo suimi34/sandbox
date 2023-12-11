@@ -1,6 +1,6 @@
 
 import { NextPage, GetServerSideProps } from 'next';
-import { urqlClient } from '@/lib/gql-requests';
+import { urqlClient } from '../../../graphql/lib/gql-requests';
 import { gql } from 'urql';
 
 type Dog = {
@@ -38,18 +38,18 @@ const Index: NextPage<Props> = (props) => {
 }
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  try {
-    const client = await urqlClient();
-    const result = await client.query(DogsQuery, {}).toPromise();
+  const client = await urqlClient();
+  const result = await client.query(DogsQuery, {}).toPromise();
 
-    return {
-      props: {
-        dogs: result.data.dogs.nodes
-      }
-    }
-  } catch(e) {
+  if (result.error) {
     return {
       notFound: true
+    }
+  }
+
+  return {
+    props: {
+      dogs: result.data.dogs.nodes
     }
   }
 }
