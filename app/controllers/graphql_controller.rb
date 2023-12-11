@@ -8,23 +8,16 @@ class GraphqlController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def execute
-    pp'here'
     variables = prepare_variables(params[:variables])
     query = params[:query]
-    pp 'query'
-    pp query
     operation_name = params[:operationName]
     context = {
       # Query context goes here, for example:
       # current_user: current_user,
     }
     result = SandboxSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
-    pp 'res'
-    pp result
     render json: result
   rescue StandardError => e
-    pp 'eeeeee'
-    pp e
     raise e unless Rails.env.development?
     handle_error_in_development(e)
   end
