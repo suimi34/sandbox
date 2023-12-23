@@ -1,5 +1,4 @@
 steps:
-  # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'build -t gcr.io/sandbox-dev-407109/github.com/suimi34/sandbox:$COMMIT_SHA .'
