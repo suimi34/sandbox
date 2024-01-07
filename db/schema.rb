@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_10_073705) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_07_043234) do
   create_table "dogs", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "open_ai_messages", charset: "utf8mb4", force: :cascade do |t|
+    t.text "content", null: false
+    t.string "thread_id", null: false
+    t.string "run_id"
+    t.text "response"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
