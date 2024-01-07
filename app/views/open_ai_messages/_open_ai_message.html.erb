@@ -1,0 +1,15 @@
+<div id="<%= dom_id open_ai_message %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">ID: <%= open_ai_message.id %></strong>
+  </p>
+  <p class="my-5">
+    <strong class="block font-medium mb-1">テーマ: <%= open_ai_message.content %></strong>
+  </p>
+  <p class="my-5">
+    <strong class="block font-medium mb-1">本文: <%= simple_format(open_ai_message.response) %></strong>
+  </p>
+  <% if action_name != "show" %>
+    <%= link_to "Show this open ai message", open_ai_message, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>
