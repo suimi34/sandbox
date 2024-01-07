@@ -66,6 +66,7 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    base64 (0.2.0)
     bindex (0.8.1)
     bootsnap (1.17.0)
       msgpack (~> 1.2)
@@ -77,8 +78,16 @@ GEM
       irb (>= 1.5.0)
       reline (>= 0.3.1)
     erubi (1.12.0)
+    event_stream_parser (1.0.0)
     faker (3.2.1)
       i18n (>= 1.8.11, < 2)
+    faraday (2.8.1)
+      base64
+      faraday-net_http (>= 2.0, < 3.1)
+      ruby2_keywords (>= 0.0.4)
+    faraday-multipart (1.0.4)
+      multipart-post (~> 2)
+    faraday-net_http (3.0.2)
     globalid (1.2.1)
       activesupport (>= 6.1)
     graphiql-rails (1.9.0)
@@ -111,6 +120,7 @@ GEM
     mini_mime (1.1.5)
     minitest (5.20.0)
     msgpack (1.7.2)
+    multipart-post (2.3.0)
     mysql2 (0.5.5)
     net-imap (0.3.4)
       date
@@ -170,6 +180,11 @@ GEM
       psych (>= 4.0.0)
     reline (0.3.8)
       io-console (~> 0.5)
+    ruby-openai (6.3.1)
+      event_stream_parser (>= 0.3.0, < 2.0.0)
+      faraday (>= 1)
+      faraday-multipart (>= 1)
+    ruby2_keywords (0.0.5)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -222,6 +237,7 @@ DEPENDENCIES
   pagy
   puma (~> 5.0)
   rails (~> 7.0.8)
+  ruby-openai
   sprockets-rails
   stimulus-rails
   tailwindcss-rails
