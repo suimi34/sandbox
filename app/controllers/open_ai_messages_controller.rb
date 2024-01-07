@@ -35,23 +35,9 @@ class OpenAiMessagesController < ApplicationController
   def create
     @open_ai_message = OpenAiMessage.new(open_ai_message_params)
 
+    OpenAi::ShortStoryService.new(@open_ai_message).create!
 
-    # 非同期化
-    post_open_ai
-    # Retrieve/poll Run to observe status
-    # response = client.runs.retrieve(id: run_id, thread_id: thread_id)
-    # pp response
-    # status = response['status']
-
-    respond_to do |format|
-      if @open_ai_message.save
-        format.html { redirect_to open_ai_message_url(@open_ai_message), notice: "Open ai message was successfully created." }
-        format.json { render :show, status: :created, location: @open_ai_message }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @open_ai_message.errors, status: :unprocessable_entity }
-      end
-    end
+    redirect_to open_ai_message_url(@open_ai_message), notice: "Open ai message was successfully created."
   end
 
   # PATCH/PUT /open_ai_messages/1 or /open_ai_messages/1.json
@@ -86,31 +72,5 @@ class OpenAiMessagesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def open_ai_message_params
       params.fetch(:open_ai_message).permit(:content)
-    end
-
-    def post_open_ai
-      client = OpenAI::Client.new(access_token: ENV.fetch("OPEN_AI_ACCESS_TOKEN"))
-      assistant_id = ENV.fetch("OPEN_AI_ASSISTANT_ID")
-
-      response = client.threads.create
-      thread_id = response["id"]
-      @open_ai_message.thread_id = thread_id
-
-      message_id = client.messages.create(
-      thread_id: thread_id,
-        parameters: {
-          role: "user", # Required for manually created messages
-          content: "「#{@open_ai_message.content}」をお題にショートストーリーを作成してください"
-        }
-      )["id"]
-
-      # Create run (will use instruction/model/tools from Assistant's definition)
-      response = client.runs.create(thread_id: thread_id,
-        parameters: {
-          assistant_id: assistant_id
-        }
-      )
-      run_id = response['id']
-      @open_ai_message.run_id = run_id
     end
 end
