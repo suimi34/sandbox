@@ -36,6 +36,7 @@ class OpenAiMessagesController < ApplicationController
     @open_ai_message = OpenAiMessage.new(open_ai_message_params)
 
     OpenAi::ShortStoryService.new(@open_ai_message).create!
+    ReflectShortStoryJob.perform_later(@open_ai_message.thread_id, @open_ai_message.run_id)
 
     redirect_to open_ai_message_url(@open_ai_message), notice: "Open ai message was successfully created."
   end
