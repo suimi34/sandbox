@@ -13,9 +13,11 @@ web:
 schema:
 	docker compose run --rm --no-deps web rails graphql:schema:dump
 
-
 test_web:
 	docker compose -f docker-compose.test.yml up --no-deps -d test_web
+
+test_precompile:
+	docker compose -f docker-compose.test.yml run --rm --no-deps test_web bundle exec rake assets:precompile
 
 test_bundle:
 	docker compose -f docker-compose.test.yml run --rm --no-deps test_web bundle
