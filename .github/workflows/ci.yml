@@ -1,5 +1,6 @@
 name: CI
 on:
+  pull_request:
   push:
     branches:
       - main
@@ -7,7 +8,19 @@ on:
   # FIREBASE_API_KEY: ${{ vars.FIREBASE_API_KEY }}
   # FIREBASE_AUTH_DOMAIN: ${{ vars.FIREBASE_AUTH_DOMAIN }}
   # RAILS_MASTER_KEY: ${{ vars.RAILS_MASTER_KEY }}
+
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: debug
+        run: echo ${{ github.head_ref }}
+      - name: debug2
+        run: echo ${{ github.ref_name == 'main' }}
+      - name: run rspec
+        run: make rspec
   build:
     runs-on: ubuntu-latest
     steps:

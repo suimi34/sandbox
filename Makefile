@@ -12,3 +12,10 @@ web:
 
 schema:
 	docker compose run --rm --no-deps web rails graphql:schema:dump
+
+rspec:
+	docker compose -f docker-compose.test.yml up -d test_web
+	docker compose -f docker-compose.test.yml run --rm --no-deps test_web bundle
+	docker compose -f docker-compose.test.yml run --rm --no-deps test_web rails db:create
+	docker compose -f docker-compose.test.yml run --rm --no-deps test_web rails db:migrate
+	docker compose -f docker-compose.test.yml run --rm --no-deps test_web rspec spec/
