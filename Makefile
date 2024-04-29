@@ -20,6 +20,7 @@ test_clobber:
 	docker compose -f docker-compose.test.yml run --rm --no-deps test_web bundle exec rake assets:clobber
 
 test_precompile:
+	docker compose -f docker-compose.test.yml run --rm --no-deps test_web bundle exec rails tailwindcss:build
 	docker compose -f docker-compose.test.yml run --rm --no-deps test_web bundle exec bootsnap precompile --gemfile
 	docker compose -f docker-compose.test.yml run --rm --no-deps test_web bundle exec bootsnap precompile app/ lib/
 	docker compose -f docker-compose.test.yml run --rm --no-deps test_web bundle exec rake assets:precompile
