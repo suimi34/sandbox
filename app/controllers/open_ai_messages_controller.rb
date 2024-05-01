@@ -3,17 +3,6 @@ class OpenAiMessagesController < ApplicationController
 
   # GET /open_ai_messages or /open_ai_messages.json
   def index
-    open_ai_messages = OpenAiMessage.all
-    client = OpenAI::Client.new(access_token: ENV.fetch("OPEN_AI_ACCESS_TOKEN"))
-
-    open_ai_messages.reject { _1.response.present? }.each do |message|
-      conversations = client.messages.list(thread_id: message.thread_id)
-      res = conversations['data'].first { _1['role'] == 'assistant' }
-      response = res['content'][0]['text']['value']
-      message.response = response
-      message.save!
-    end
-
     @open_ai_messages = OpenAiMessage.all.order(created_at: :desc)
   end
 

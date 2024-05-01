@@ -2,15 +2,15 @@ steps:
   - name: gcr.io/cloud-builders/docker
     args:
       - build
-      - '--no-cache'
-      - '-t'
+      - "--no-cache"
+      - "-t"
       - >-
         $_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
       - .
-      - '-f'
+      - "-f"
       - Dockerfile.prod
-      - '--build-arg'
-      - 'SECRET_KEY_BASE=${_SECRET_KEY_BASE}'
+      - "--build-arg"
+      - "SECRET_KEY_BASE=${_SECRET_KEY_BASE}"
     id: Build
 
   - name: gcr.io/cloud-builders/docker
@@ -20,21 +20,21 @@ steps:
         $_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
     id: Push
 
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:slim'
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
     args:
       - beta
       - run
       - services
       - update
       - $_SERVICE_NAME
-      - '--platform=managed'
+      - "--platform=managed"
       - >-
         --image=$_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
       - >-
         --labels=managed-by=gcp-cloud-build-deploy-cloud-run,commit-sha=$COMMIT_SHA,gcb-build-id=$BUILD_ID
-      - '--region=$_DEPLOY_REGION'
-      - '--quiet'
-      - '--network=${_NETWORK}'
+      - "--region=$_DEPLOY_REGION"
+      - "--quiet"
+      - "--network=${_NETWORK}"
     id: Deploy
     entrypoint: gcloud
 
