@@ -24,8 +24,36 @@ services:
       DB_NAME: sandbox_development
       DB_USER: root
       DB_PASS: root
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      OPEN_AI_ACCESS_TOKEN:
+      OPEN_AI_ASSISTANT_ID:
     depends_on:
       - db
+
+  worker:
+    build: .
+    command: bundle exec sidekiq
+    volumes:
+      - .:/sandbox
+      - bundle:/usr/local/bundle
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: sandbox_development
+      DB_USER: root
+      DB_PASS: root
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      OPEN_AI_ACCESS_TOKEN:
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:6.2.14
+    platform: linux/x86_64
+    ports:
+      - "6379:6379"
 
 volumes:
   db_data:

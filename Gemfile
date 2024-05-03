@@ -56,6 +56,8 @@ gem 'graphql'
 
 gem 'ruby-openai'
 
+gem 'sidekiq'
+
 gem 'aws-sdk-rails'
 
 group :development, :test do
