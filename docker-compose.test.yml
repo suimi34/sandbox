@@ -1,60 +1,60 @@
 version: '3'
 services:
-  db:
+  test_db:
     image: mysql:5.7.41
     platform: linux/x86_64
     volumes:
-      - db_data:/var/lib/mysql
+      - test_db_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
     ports:
       - "3306:3306"
 
-  web:
+  test_web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/sandbox
-      - bundle:/usr/local/bundle
+      - test_bundle:/usr/local/bundle
     ports:
-      - "3000:3000"
+      - "3001:3000"
     environment:
-      DB_HOST: db
+      DB_HOST: test_db
       DB_PORT: 3306
-      DB_NAME: sandbox_development
+      DB_NAME: sandbox_test
       DB_USER: root
       DB_PASS: root
-      REDIS_HOST: redis
+      REDIS_HOST: test_redis
       REDIS_PORT: 6379
-      OPEN_AI_ACCESS_TOKEN:
-      OPEN_AI_ASSISTANT_ID:
+      RAILS_ENV: test
+      GOOGLE_OAUTH2_CLIENT_ID: ''
     depends_on:
-      - db
+      - test_db
 
-  worker:
+  test_worker:
     build: .
     command: bundle exec sidekiq
     volumes:
       - .:/sandbox
-      - bundle:/usr/local/bundle
+      - test_bundle:/usr/local/bundle
     environment:
-      DB_HOST: db
+      DB_HOST: test_db
       DB_PORT: 3306
-      DB_NAME: sandbox_development
+      DB_NAME: sandbox_test
       DB_USER: root
       DB_PASS: root
-      REDIS_HOST: redis
+      REDIS_HOST: test_redis
       REDIS_PORT: 6379
       OPEN_AI_ACCESS_TOKEN:
     depends_on:
-      - redis
+      - test_redis
 
-  redis:
+  test_redis:
     image: redis:6.2.14
     platform: linux/x86_64
     ports:
       - "6379:6379"
 
 volumes:
-  db_data:
-  bundle:
+  test_db_data:
+  test_bundle:
