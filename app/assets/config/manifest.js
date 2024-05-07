@@ -5,3 +5,9 @@
 //= link controllers/application.js
 //= link controllers/hello_controller.js
 //= link controllers/index.js
+//= link @firebase--database.js
+//= link @firebase--app.js
+//= link @firebase--component.js
+//= link @firebase--logger.js
+//= link @firebase--util.js
+//= link idb.js
