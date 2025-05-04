@@ -7,9 +7,9 @@ ENV RAILS_ENV=development
 
 WORKDIR ${ROOT}
 
-COPY Gemfile Gemfile.lock ${ROOT}
+COPY Gemfile Gemfile.lock ${ROOT}/
 
-RUN gem install bundler && bundle install
+RUN gem install bundler -v 2.6.8 && bundle install
 
 COPY . ${ROOT}
 COPY entrypoint.sh /usr/bin/
