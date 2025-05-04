@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - main
-# env:
+env:
   # FIREBASE_API_KEY: ${{ vars.FIREBASE_API_KEY }}
   # FIREBASE_AUTH_DOMAIN: ${{ vars.FIREBASE_AUTH_DOMAIN }}
-  # RAILS_MASTER_KEY: ${{ vars.RAILS_MASTER_KEY }}
+  RAILS_MASTER_KEY: ${{ vars.RAILS_MASTER_KEY }}
 
 jobs:
   test:
@@ -37,8 +37,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build docker image
-        run: docker build . -t suimi34/sandbox:dev
-        # run: docker build -f Dockerfile.prod --build-arg FIREBASE_API_KEY=$FIREBASE_API_KEY --build-arg FIREBASE_AUTH_DOMAIN=$FIREBASE_AUTH_DOMAIN --build-arg RAILS_MASTER_KEY=$RAILS_MASTER_KEY . -t suimi34/ec_rails:prod && docker save suimi34/ec_rails:prod > prod.tar
+        run: docker build -f Dockerfile.prod --build-arg RAILS_MASTER_KEY=$RAILS_MASTER_KEY . -t suimi34/sandbox:prod > prod.tar
 
       # - name: save docker image as tar
       #   uses: actions/upload-artifact@v3
