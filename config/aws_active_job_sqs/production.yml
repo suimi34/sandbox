@@ -1,0 +1,3 @@
+queues:
+  default:
+    url: <%= ENV.fetch("AWS_SQS_URL") %>

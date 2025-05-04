@@ -60,6 +60,8 @@ gem 'sidekiq'
 
 gem 'aws-sdk-rails'
 
+gem 'aws-activejob-sqs'
+
 gem 'zeitwerk'
 
 group :development, :test do
