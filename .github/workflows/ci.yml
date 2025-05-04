@@ -42,7 +42,7 @@ jobs:
         run: docker build -f Dockerfile.prod --build-arg RAILS_MASTER_KEY=$RAILS_MASTER_KEY . -t suimi34/sandbox:prod > prod.tar
 
       - name: save docker image as tar
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: prod.tar
           path: ./prod.tar
@@ -59,7 +59,7 @@ jobs:
           password: ${{ vars.DOCKERHUB_TOKEN }}
 
       - name: load docker image
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: prod.tar
 
