@@ -39,7 +39,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build docker image
-        run: docker build -f Dockerfile.prod --build-arg RAILS_MASTER_KEY=$RAILS_MASTER_KEY . -t suimi34/sandbox:prod > prod.tar
+        run: docker build -f Dockerfile.prod --build-arg RAILS_MASTER_KEY=$RAILS_MASTER_KEY . -t suimi34/sandbox:prod && docker save suimi34/sandbox:prod > prod.tar
 
       - name: save docker image as tar
         uses: actions/upload-artifact@v4
