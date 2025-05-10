@@ -241,7 +241,7 @@ GEM
     rake (13.2.1)
     rdoc (6.13.1)
       psych (>= 4.0.0)
-    redis-client (0.19.1)
+    redis-client (0.24.0)
       connection_pool
     reline (0.6.1)
       io-console (~> 0.5)
@@ -267,11 +267,12 @@ GEM
       faraday (>= 1)
       faraday-multipart (>= 1)
     securerandom (0.4.1)
-    sidekiq (7.2.0)
-      concurrent-ruby (< 2)
+    sidekiq (7.3.9)
+      base64
       connection_pool (>= 2.3.0)
+      logger
       rack (>= 2.2.4)
-      redis-client (>= 0.14.0)
+      redis-client (>= 0.22.2)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -327,7 +328,7 @@ DEPENDENCIES
   rails (~> 7.1, >= 7.1.5.1)
   rspec-rails
   ruby-openai
-  sidekiq
+  sidekiq (~> 7.3, >= 7.3.9)
   sprockets-rails
   stimulus-rails
   tailwindcss-rails
