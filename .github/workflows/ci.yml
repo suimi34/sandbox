@@ -17,10 +17,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: debug
-        run: echo ${{ github.head_ref }}
-      - name: debug2
-        run: echo ${{ github.ref_name == 'main' }}
       - name: set up test db
         run: make test_db
       - name: set up test web
@@ -29,6 +25,8 @@ jobs:
         run: make test_precompile
       - name: set up test migrate
         run: make test_migrate
+      - name: run brakeman
+        run: make test_brakeman
       - name: run rspec
         run: make rspec
   build:
