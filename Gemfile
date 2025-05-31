@@ -56,7 +56,7 @@ gem 'graphql'
 
 gem 'ruby-openai'
 
-gem 'sidekiq', '~> 7.3', '>= 7.3.9'
+gem 'sidekiq', '~> 8.0'
 
 gem 'aws-sdk-rails'
 
