@@ -9,6 +9,7 @@
 - **データベース**: MySQL
 - **開発環境**: Docker Compose
 - **主要機能**: Dog 管理、OpenAI 統合、GraphQL API
+- このプロジェクトは試したい機能を試験的に作成するsandoboxです。
 
 ## 開発環境コマンド
 
