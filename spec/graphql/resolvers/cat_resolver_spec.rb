@@ -23,8 +23,8 @@ RSpec.describe Resolvers::CatResolver do
     let!(:cat) { create(:cat, name: 'Fluffy', breed: 'Persian', age: 3, color: 'White') }
     let(:variables) { { id: cat.id.to_s } }
 
-    context "when cat exists" do
-      it "returns the cat with all fields" do
+    context 'when cat exists' do
+      it 'returns the cat with all fields' do
         res = subject
         response_cat = res.dig('data', 'cat')
 
@@ -38,23 +38,23 @@ RSpec.describe Resolvers::CatResolver do
       end
     end
 
-    context "when cat does not exist" do
+    context 'when cat does not exist' do
       let(:variables) { { id: '99999' } }
 
-      it "returns an error" do
+      it 'returns an error' do
         res = subject
         expect(res['errors']).to be_present
-        expect(res['errors'].first['message']).to include("Cat with ID 99999 not found")
+        expect(res['errors'].first['message']).to include('Cat with ID 99999 not found')
       end
     end
 
-    context "when invalid ID is provided" do
+    context 'when invalid ID is provided' do
       let(:variables) { { id: 'invalid' } }
 
-      it "returns an error" do
+      it 'returns an error' do
         res = subject
         expect(res['errors']).to be_present
-        expect(res['errors'].first['message']).to include("Cat with ID invalid not found")
+        expect(res['errors'].first['message']).to include('Cat with ID invalid not found')
       end
     end
   end
