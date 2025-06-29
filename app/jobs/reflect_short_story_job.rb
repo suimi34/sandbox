@@ -100,6 +100,8 @@ class ReflectShortStoryJob < ApplicationJob
   end
 
   def client
-    @client ||= OpenAI::Client.new(access_token: ENV.fetch("OPEN_AI_ACCESS_TOKEN"))
+    return @client if defined?(@client)
+
+    @client = OpenAI::Client.new(access_token: ENV.fetch("OPEN_AI_ACCESS_TOKEN"))
   end
 end
