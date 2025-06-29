@@ -6,8 +6,10 @@ RSpec.describe "GraphqlController", type: :request do
       <<~GQL
         query {
           dogs {
-            id
-            name
+            nodes {
+              id
+              name
+            }
           }
         }
       GQL
