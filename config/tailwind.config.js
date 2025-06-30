@@ -19,5 +19,14 @@ module.exports = {
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/typography'),
     require('@tailwindcss/container-queries'),
-  ]
+  ],
+  corePlugins: {
+    // Disable features that cause SassC issues
+    ringOpacity: false,
+    divideOpacity: false,
+    backdropOpacity: false,
+    backgroundOpacity: false,
+    borderOpacity: false,
+    textOpacity: false,
+  }
 }
