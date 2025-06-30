@@ -42,5 +42,9 @@ module Sandbox
       g.helper false
       g.view_specs false
     end
+
+    # Configure Sass to use Dart Sass instead of SassC for better Tailwind compatibility
+    config.sass = config.sass || ActiveSupport::OrderedOptions.new
+    config.sass.implementation = Sass if defined?(Sass)
   end
 end

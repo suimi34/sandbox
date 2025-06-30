@@ -1,0 +1,45 @@
+// Admin panel custom styles to avoid SassC conflicts
+
+// Ensure Administrate styles load without Tailwind conflicts
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+// Override any problematic Tailwind utilities with plain CSS
+.admin-container {
+  font-family: 'Inter', sans-serif;
+}
+
+// Fix button styles
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.btn-sm {
+  padding: 2px 6px;
+  font-size: 12px;
+  border-radius: 3px;
+}
+
+// Override any Tailwind classes that cause issues
+.border-gray-300 {
+  border-color: #d1d5db !important;
+}
+
+.text-gray-900 {
+  color: #111827 !important;
+}
+
+.bg-white {
+  background-color: #ffffff !important;
+}
