@@ -27,6 +27,8 @@ jobs:
         run: make test_migrate
       - name: run brakeman
         run: make test_brakeman
+      - name: run rubocop
+        run: make test_rubocop
       - name: run rspec
         run: make rspec
   build:
