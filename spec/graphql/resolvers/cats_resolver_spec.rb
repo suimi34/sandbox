@@ -19,17 +19,17 @@ RSpec.describe Resolvers::CatsResolver do
 
     let(:variables) { {} }
 
-    context "when no cats" do
-      it "returns empty array" do
+    context 'when no cats' do
+      it 'returns empty array' do
         res = subject
         expect(res.dig('data', 'cats', 'nodes')).to be_empty
       end
     end
 
-    context "when cats exist" do
+    context 'when cats exist' do
       let!(:cat) { create(:cat, name: 'Fluffy', breed: 'Persian', age: 3, color: 'White') }
 
-      it "returns cats" do
+      it 'returns cats' do
         res = subject
         response_cat = res.dig('data', 'cats', 'nodes').first
 
@@ -37,11 +37,11 @@ RSpec.describe Resolvers::CatsResolver do
       end
     end
 
-    context "when multiple cats exist" do
+    context 'when multiple cats exist' do
       let!(:cat1) { create(:cat, name: 'Fluffy', breed: 'Persian') }
       let!(:cat2) { create(:cat, name: 'Whiskers', breed: 'Siamese') }
 
-      it "returns all cats" do
+      it 'returns all cats' do
         res = subject
         cats = res.dig('data', 'cats', 'nodes')
 

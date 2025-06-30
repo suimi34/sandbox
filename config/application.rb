@@ -36,7 +36,11 @@ module Sandbox
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    # Don't generate system test files.
-    config.generators.system_tests = nil
+    config.generators do |g|
+      g.system_tests false
+      g.assets false
+      g.helper false
+      g.view_specs false
+    end
   end
 end

@@ -1,1 +1,1 @@
-json.array! @dogs, partial: "dogs/dog", as: :dog
+json.array! @dogs, partial: 'dogs/dog', as: :dog

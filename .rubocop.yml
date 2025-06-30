@@ -1,0 +1,75 @@
+plugins:
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 3.2
+  TargetRailsVersion: 7.1
+  NewCops: enable
+  Exclude:
+    - "bin/*"
+    - "db/migrate/*"
+    - "db/schema.rb"
+    - "node_modules/**/*"
+    - "vendor/**/*"
+    - "tmp/**/*"
+    - "log/**/*"
+    - "config/environments/*"
+    - "config/application.rb"
+    - "config/boot.rb"
+    - "config/environment.rb"
+
+# Rails specific cops
+Rails:
+  Enabled: true
+
+# Style cops
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# Layout cops
+Layout/LineLength:
+  Max: 120
+
+# Metrics cops
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
+    - "config/routes.rb"
+    - "app/graphql/**/*"
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/AbcSize:
+  Max: 25
+
+Metrics/ClassLength:
+  Max: 150
+
+# Disable specific RSpec rules
+RSpec/ExampleLength:
+  Max: 10
+  CountAsOne: ["array", "hash", "heredoc", "method_call"]
+
+RSpec/IndexedLet:
+  Enabled: false
+
+RSpec/LetSetup:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/NamedSubject:
+  Enabled: false
+
+# Disable specific Rails and Naming rules
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Naming/MethodParameterName:
+  Enabled: false

@@ -21,7 +21,7 @@ class ReflectShortStoryJob < ApplicationJob
 
       sleep POLLING_INTERVAL
     end
-  rescue => e
+  rescue StandardError => e
     Rails.logger.error("ReflectShortStoryJob failed: #{e.message}")
     Rails.logger.error(e.backtrace.join("\n"))
     raise
@@ -30,14 +30,14 @@ class ReflectShortStoryJob < ApplicationJob
   private
 
   def check_timeout!(start_time)
-    if Time.current - start_time > MAX_POLLING_TIME
-      raise StandardError, "OpenAI run polling timed out after #{MAX_POLLING_TIME} seconds"
-    end
+    return unless Time.current - start_time > MAX_POLLING_TIME
+
+    raise StandardError, "OpenAI run polling timed out after #{MAX_POLLING_TIME} seconds"
   end
 
   def fetch_run_status(thread_id, run_id)
     client.runs.retrieve(id: run_id, thread_id: thread_id)
-  rescue => e
+  rescue StandardError => e
     Rails.logger.error("Failed to fetch run status: #{e.message}")
     raise
   end
@@ -45,7 +45,7 @@ class ReflectShortStoryJob < ApplicationJob
   def handle_run_status(status, run, thread_id, run_id)
     case status
     when *POLLING_STATUSES
-      Rails.logger.debug("Polling OpenAI run #{run_id}, status: #{status}")
+      Rails.logger.debug { "Polling OpenAI run #{run_id}, status: #{status}" }
       false # Continue polling
     when 'completed'
       handle_completed_run(thread_id, run_id)
@@ -82,6 +82,7 @@ class ReflectShortStoryJob < ApplicationJob
   def find_message(thread_id, run_id)
     message = OpenAiMessage.find_by(run_id: run_id, thread_id: thread_id)
     raise StandardError, "Message not found for run_id: #{run_id}, thread_id: #{thread_id}" unless message
+
     message
   end
 
@@ -89,12 +90,10 @@ class ReflectShortStoryJob < ApplicationJob
     conversations = client.messages.list(thread_id: thread_id)
     assistant_message = conversations['data'].find { |msg| msg['role'] == 'assistant' }
 
-    unless assistant_message
-      raise StandardError, "No assistant response found for thread_id: #{thread_id}"
-    end
+    raise StandardError, "No assistant response found for thread_id: #{thread_id}" unless assistant_message
 
     assistant_message['content'][0]['text']['value']
-  rescue => e
+  rescue StandardError => e
     Rails.logger.error("Failed to extract assistant response: #{e.message}")
     raise
   end
@@ -102,6 +101,6 @@ class ReflectShortStoryJob < ApplicationJob
   def client
     return @client if defined?(@client)
 
-    @client = OpenAI::Client.new(access_token: ENV.fetch("OPEN_AI_ACCESS_TOKEN"))
+    @client = OpenAI::Client.new(access_token: ENV.fetch('OPEN_AI_ACCESS_TOKEN'))
   end
 end
