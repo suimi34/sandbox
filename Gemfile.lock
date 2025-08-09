@@ -396,7 +396,7 @@ DEPENDENCIES
   mysql2 (~> 0.5)
   pagy (~> 6.5)
   puma
-  rails (~> 7.2.0)
+  rails (~> 7.2)
   rspec-rails
   rubocop
   rubocop-rails
