@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe 'Cats', type: :request do
+RSpec.describe 'Cats' do
   describe 'GET /cats' do
     let!(:cat) { create(:cat) }
 
     it 'returns 200' do
       get cats_path
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
     end
 
     it 'displays cat information' do
@@ -21,7 +21,7 @@ RSpec.describe 'Cats', type: :request do
 
     it 'returns 200' do
       get cat_path(cat)
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
     end
 
     it 'displays cat details' do
@@ -36,7 +36,7 @@ RSpec.describe 'Cats', type: :request do
   describe 'GET /cats/new' do
     it 'returns 200' do
       get new_cat_path
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
     end
   end
 
@@ -91,7 +91,7 @@ RSpec.describe 'Cats', type: :request do
 
     it 'returns 200' do
       get edit_cat_path(cat)
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
     end
   end
 

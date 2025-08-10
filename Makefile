@@ -19,6 +19,9 @@ brakeman:
 rubocop:
 	docker compose run --rm --no-deps web bundle exec rubocop
 
+rubocop_fix:
+	docker compose run --rm --no-deps web bundle exec rubocop --autocorrect
+
 test_web:
 	docker compose -f docker-compose.test.yml up --no-deps -d test_web
 

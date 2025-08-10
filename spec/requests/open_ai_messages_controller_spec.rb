@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe OpenAiMessagesController, type: :request do
+RSpec.describe OpenAiMessagesController do
   describe '#idnex' do
     it 'returns 200' do
       get open_ai_messages_path
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
     end
   end
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Cat, type: :model do
+RSpec.describe Cat do
   describe 'validations' do
     it 'validates presence of name' do
       cat = described_class.new(breed: 'Persian', age: 3, color: 'White')
