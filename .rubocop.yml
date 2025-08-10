@@ -85,3 +85,6 @@ GraphQL/FieldDescription:
 
 GraphQL/ArgumentDescription:
   Enabled: false
+
+GraphQL/OrderedFields:
+  Enabled: false
