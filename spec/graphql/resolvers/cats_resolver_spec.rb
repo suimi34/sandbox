@@ -7,10 +7,12 @@ RSpec.describe Resolvers::CatsResolver do
     let(:query) do
       <<~GQL
         query {
-          cats {
-            nodes {
-              id
-              name
+          cats(first: 10) {
+            edges {
+              node {
+                id
+                name
+              }
             }
           }
         }
@@ -22,7 +24,7 @@ RSpec.describe Resolvers::CatsResolver do
     context 'when no cats' do
       it 'returns empty array' do
         res = subject
-        expect(res.dig('data', 'cats', 'nodes')).to be_empty
+        expect(res.dig('data', 'cats', 'edges')).to be_empty
       end
     end
 
@@ -31,7 +33,7 @@ RSpec.describe Resolvers::CatsResolver do
 
       it 'returns cats' do
         res = subject
-        response_cat = res.dig('data', 'cats', 'nodes').first
+        response_cat = res.dig('data', 'cats', 'edges').first['node']
 
         expect(response_cat['id']).to eq(cat.id.to_s)
       end
@@ -43,10 +45,10 @@ RSpec.describe Resolvers::CatsResolver do
 
       it 'returns all cats' do
         res = subject
-        cats = res.dig('data', 'cats', 'nodes')
+        cats = res.dig('data', 'cats', 'edges')
 
         expect(cats.length).to eq(2)
-        cat_names = cats.map { |cat| cat['name'] }
+        cat_names = cats.map { |edge| edge['node']['name'] }
         expect(cat_names).to contain_exactly('Fluffy', 'Whiskers')
       end
     end

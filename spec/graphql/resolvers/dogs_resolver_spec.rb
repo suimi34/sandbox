@@ -7,10 +7,12 @@ RSpec.describe Resolvers::DogsResolver do
     let(:query) do
       <<~GQL
         query {
-          dogs {
-            nodes {
-              id
-              name
+          dogs(first: 10) {
+            edges {
+              node {
+                id
+                name
+              }
             }
           }
         }
@@ -22,7 +24,7 @@ RSpec.describe Resolvers::DogsResolver do
     context 'when no dogs' do
       it 'returns empty array' do
         res = subject
-        expect(res.dig('data', 'dogs', 'nodes')).to be_empty
+        expect(res.dig('data', 'dogs', 'edges')).to be_empty
       end
     end
 
@@ -31,7 +33,7 @@ RSpec.describe Resolvers::DogsResolver do
 
       it 'returns dogs' do
         res = subject
-        response_dog = res.dig('data', 'dogs', 'nodes').first
+        response_dog = res.dig('data', 'dogs', 'edges').first['node']
         expect(response_dog['id']).to eq(dog.id.to_s)
       end
     end

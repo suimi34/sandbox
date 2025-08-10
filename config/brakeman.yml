@@ -1,0 +1,5 @@
+# Brakeman configuration
+# Ignore Unmaintained Dependency warnings by skipping EOL checks
+skip_checks:
+  - CheckEOLRails
+  - CheckEOLRuby
