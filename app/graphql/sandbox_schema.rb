@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SandboxSchema < GraphQL::Schema
+  max_depth 15
+  max_complexity 100
   mutation(Types::MutationType)
   query(Types::QueryType)
 

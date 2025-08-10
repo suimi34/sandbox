@@ -7,7 +7,7 @@ plugins:
 
 AllCops:
   TargetRubyVersion: 3.2
-  TargetRailsVersion: 7.1
+  TargetRailsVersion: 7.2
   NewCops: enable
   Exclude:
     - "bin/*"
@@ -84,10 +84,4 @@ GraphQL/FieldDescription:
   Enabled: false
 
 GraphQL/ArgumentDescription:
-  Enabled: false
-
-GraphQL/MaxComplexitySchema:
-  Enabled: false
-
-GraphQL/MaxDepthSchema:
   Enabled: false
