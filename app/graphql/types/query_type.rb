@@ -14,12 +14,9 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
     field :cat, resolver: Resolvers::CatResolver
-
-    field :cats, resolver: Resolvers::CatsResolver
-
+    field :cats, resolver: Resolvers::CatsResolver, max_page_size: 100
     field :dog, resolver: Resolvers::DogResolver
-
-    field :dogs, resolver: Resolvers::DogsResolver
+    field :dogs, resolver: Resolvers::DogsResolver, max_page_size: 100
 
     def node(id:)
       context.schema.object_from_id(id, context)
