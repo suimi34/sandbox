@@ -1,10 +1,13 @@
 plugins:
   - rubocop-rails
   - rubocop-rspec
+  - rubocop-factory_bot
+  - rubocop-graphql
+  - rubocop-rspec_rails
 
 AllCops:
   TargetRubyVersion: 3.2
-  TargetRailsVersion: 7.1
+  TargetRailsVersion: 7.2
   NewCops: enable
   Exclude:
     - "bin/*"
@@ -72,4 +75,16 @@ Rails/I18nLocaleTexts:
   Enabled: false
 
 Naming/MethodParameterName:
+  Enabled: false
+
+GraphQL/ObjectDescription:
+  Enabled: false
+
+GraphQL/FieldDescription:
+  Enabled: false
+
+GraphQL/ArgumentDescription:
+  Enabled: false
+
+GraphQL/OrderedFields:
   Enabled: false

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'GraphqlController', type: :request do
+RSpec.describe 'GraphqlController' do
   describe 'execute' do
     let(:query) do
       <<~GQL
@@ -17,7 +17,7 @@ RSpec.describe 'GraphqlController', type: :request do
 
     it 'returns 200' do
       post graphql_path, params: { query: query }
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
     end
   end
 end
