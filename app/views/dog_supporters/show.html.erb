@@ -1,0 +1,20 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Dog Supporter詳細</h1>
+
+<div>
+  <strong>Dog:</strong>
+  <%= @dog_supporter.dog.name %>
+</div>
+
+<div>
+  <strong>Supporter:</strong>
+  <%= @dog_supporter.supporter.email %>
+</div>
+
+<div>
+  <%= link_to "編集", edit_dog_supporter_path(@dog_supporter) %> |
+  <%= link_to "戻る", dog_supporters_path %>
+
+  <%= button_to "削除", @dog_supporter, method: :delete %>
+</div>

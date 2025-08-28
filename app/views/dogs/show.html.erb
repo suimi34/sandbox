@@ -6,6 +6,21 @@
 
     <%= render @dog %>
 
+    <div class="mt-4">
+      <h2>Supporters:</h2>
+      <% if @dog.supporters.any? %>
+        <ul>
+          <% @dog.supporters.each do |supporter| %>
+            <li><%= supporter.email %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>No supporters found for this dog.</p>
+      <% end %>
+    </div>
+
+    <%= link_to 'この犬のサポーターを追加', new_dog_supporter_path(dog_id: @dog.id), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+
     <%= link_to 'Edit this dog', edit_dog_path(@dog), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <div class="inline-block ml-2">
       <%= button_to 'Destroy this dog', dog_path(@dog), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>

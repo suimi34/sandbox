@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_29_024152) do
+ActiveRecord::Schema[7.2].define(version: 2025_08_28_130235) do
   create_table "cats", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "breed"
@@ -18,6 +18,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_29_024152) do
     t.string "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "dog_supporters", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "dog_id", null: false, unsigned: true
+    t.bigint "supporter_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dog_id"], name: "index_dog_supporters_on_dog_id"
+    t.index ["supporter_id"], name: "index_dog_supporters_on_supporter_id"
   end
 
   create_table "dogs", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", force: :cascade do |t|
@@ -34,4 +43,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_29_024152) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "supporters", charset: "utf8mb4", force: :cascade do |t|
+    t.string "email", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "dog_supporters", "dogs", name: "index_dog_supporters_on_dog_id"
+  add_foreign_key "dog_supporters", "supporters"
 end

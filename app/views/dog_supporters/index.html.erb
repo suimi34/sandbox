@@ -1,0 +1,27 @@
+<h1>Dog Supporters</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dog</th>
+      <th>Supporter</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @dog_supporters.each do |dog_supporter| %>
+      <tr>
+        <td><%= dog_supporter.dog.name %></td>
+        <td><%= dog_supporter.supporter.email %></td>
+        <td><%= link_to "詳細", dog_supporter %></td>
+        <td><%= link_to "編集", edit_dog_supporter_path(dog_supporter) %></td>
+        <td><%= button_to "削除", dog_supporter, method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to "新しいDog Supporter", new_dog_supporter_path %>

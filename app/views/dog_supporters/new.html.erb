@@ -1,0 +1,31 @@
+<h1>新しいDog Supporterを作成</h1>
+
+<%= form_with(model: @dog_supporter) do |form| %>
+  <% if @dog_supporter.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@dog_supporter.errors.count, "error") %> prohibited this dog_supporter from being saved:</h2>
+      <ul>
+        <% @dog_supporter.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :dog_id %>
+    <%= form.collection_select :dog_id, @dogs, :id, :name, { prompt: "Select a Dog" }, { selected: params[:dog_id] } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :supporter_id %>
+    <%= form.collection_select :supporter_id, @supporters, :id, :email, prompt: "Select a Supporter" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Dog Supporterを作成" %>
+  </div>
+<% end %>
+
+<%= link_to "戻る", dog_supporters_path %>
+

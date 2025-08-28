@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :cats
   resources :dogs
   resources :open_ai_messages
+  resources :dog_supporters
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
