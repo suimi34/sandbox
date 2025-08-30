@@ -14,7 +14,7 @@ schema:
 	docker compose run --rm --no-deps web rails graphql:schema:dump
 
 brakeman:
-	docker compose run --rm --no-deps web brakeman -A
+	docker compose run --rm --no-deps web brakeman
 
 rubocop:
 	docker compose run --rm --no-deps web bundle exec rubocop
@@ -26,7 +26,7 @@ test_web:
 	docker compose -f docker-compose.test.yml up --no-deps -d test_web
 
 test_brakeman:
-	docker compose -f docker-compose.test.yml run --rm --no-deps test_web brakeman -A
+	docker compose -f docker-compose.test.yml run --rm --no-deps test_web brakeman
 
 test_rubocop:
 	docker compose -f docker-compose.test.yml run --rm --no-deps test_web bundle exec rubocop
