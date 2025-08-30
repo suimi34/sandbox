@@ -3,8 +3,3 @@
 skip_checks:
   - CheckEOLRails
   - CheckEOLRuby
-
-skip_lines:
-  UnscopedFind:
-    app/controllers/dog_supporters_controller.rb:
-      - 24
