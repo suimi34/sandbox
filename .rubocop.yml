@@ -74,6 +74,12 @@ RSpec/NamedSubject:
 Rails/I18nLocaleTexts:
   Enabled: false
 
+Rails/RedundantActiveRecordAllMethod:
+  Enabled: false
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
 Naming/MethodParameterName:
   Enabled: false
 
