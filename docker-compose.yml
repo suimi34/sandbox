@@ -28,6 +28,9 @@ services:
       REDIS_PORT: 6379
       OPEN_AI_ACCESS_TOKEN:
       OPEN_AI_ASSISTANT_ID:
+      SERVICE_DOMAIN: ''
+      GMAIL_USERNAME: ''
+      GMAIL_APP_PASSWORD: ''
     depends_on:
       - db
 
