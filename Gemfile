@@ -64,7 +64,7 @@ gem 'aws-activejob-sqs'
 
 gem 'zeitwerk'
 
-gem 'administrate', '~> 0.20.1'
+gem 'administrate', '~> 1.0.0'
 
 gem 'cgi', '~> 0.4.2' # rails7.2.3へのアップデートでrspecのエラーが発生したため、cgiのバージョンを固定
 
