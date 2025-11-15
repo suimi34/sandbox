@@ -81,7 +81,7 @@ RSpec.describe 'Cats' do
 
       it 'renders the new template' do
         post cats_path, params: { cat: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
   end
@@ -121,7 +121,7 @@ RSpec.describe 'Cats' do
     context 'with invalid parameters' do
       it 'renders the edit template' do
         patch cat_path(cat), params: { cat: { name: '' } }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
   end

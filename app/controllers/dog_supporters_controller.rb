@@ -20,7 +20,7 @@ class DogSupportersController < ApplicationController
     else
       @dogs = Dog.all
       @supporters = Supporter.all
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 

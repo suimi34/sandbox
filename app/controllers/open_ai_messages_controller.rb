@@ -36,8 +36,8 @@ class OpenAiMessagesController < ApplicationController
         end
         format.json { render :show, status: :ok, location: @open_ai_message }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @open_ai_message.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @open_ai_message.errors, status: :unprocessable_content }
       end
     end
   end

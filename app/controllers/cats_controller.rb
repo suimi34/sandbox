@@ -26,8 +26,8 @@ class CatsController < ApplicationController
         format.html { redirect_to cat_url(@cat), notice: 'Cat was successfully created.' }
         format.json { render :show, status: :created, location: @cat }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @cat.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @cat.errors, status: :unprocessable_content }
       end
     end
   end
@@ -39,8 +39,8 @@ class CatsController < ApplicationController
         format.html { redirect_to cat_url(@cat), notice: 'Cat was successfully updated.' }
         format.json { render :show, status: :ok, location: @cat }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @cat.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @cat.errors, status: :unprocessable_content }
       end
     end
   end
