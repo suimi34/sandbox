@@ -13,3 +13,5 @@ updates:
       # parser shall be same version as Ruby
       - dependency-name: "parser"
       - dependency-name: "pagy" # TODO: tailwindcssのスタイル
+      - dependency-name: "administrate"
+        update-types: ["version-update:semver-patch"]
